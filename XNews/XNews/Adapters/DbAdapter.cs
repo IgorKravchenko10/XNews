@@ -14,15 +14,6 @@ namespace XNews.Adapters
     {
         private static object _collisionLock = new object();
 
-        public static IEnumerable<News> GetNews(DbContext dbContext)
-        {
-            lock (_collisionLock)
-            {
-                var result = dbContext.Database.Table<News>().ToList();
-                return result;
-            }
-        }
-
         public async static Task<IEnumerable<News>> GetNewsAsync(DbContext dbContext)
         {
             IEnumerable<News> news = await Task.Factory.StartNew(() =>
@@ -40,21 +31,6 @@ namespace XNews.Adapters
             lock (_collisionLock)
             {
                 return dbContext.Database.Query<News>("SELECT * FROM News").AsEnumerable();
-            }
-        }
-
-        public static int AddNews(DbContext dbContext, News news)
-        {
-            lock (_collisionLock)
-            {
-                if (news.NewsId != 0)
-                {
-                    return dbContext.Database.Update(news);
-                }
-                else
-                {
-                    return dbContext.Database.Insert(news);
-                }
             }
         }
 
