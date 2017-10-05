@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XNews.Pages.NewsDetailPage"
+             Title="{Binding Title}">
+
+    <AbsoluteLayout>
+        <WebView x:Name="Browser" Source="{Binding Link}" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" />
+        <ActivityIndicator x:Name="activityIndicator" 
+                           IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.3, 0.3" AbsoluteLayout.LayoutFlags="All"/>
+    </AbsoluteLayout>
+</ContentPage>
