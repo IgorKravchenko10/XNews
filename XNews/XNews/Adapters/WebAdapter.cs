@@ -29,6 +29,7 @@ namespace XNews.Adapters
             using (HttpClient httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(GetFullUriFromResources());
+                response.EnsureSuccessStatusCode();
                 json = response.Content.ReadAsStringAsync().Result;
             }
             var rssObject = JsonConvert.DeserializeObject<RssObject>(json);
